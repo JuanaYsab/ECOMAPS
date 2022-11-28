@@ -8,6 +8,9 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding" style="text-align: justify;">
+  <ion-refresher slot="fixed" (ionRefresh)="cargarComentarios()">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 
     <form [formGroup]="form">
       <ion-list>

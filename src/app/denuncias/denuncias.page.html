@@ -8,6 +8,9 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding" style="text-align: justify ;">
+  <ion-refresher slot="fixed" (ionRefresh)="cargarLey()">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <h4 style="color:#229276; font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;">Ley N° 716 que Sanciona Delitos 
     Ambientales, Art. 12º.
   </h4>

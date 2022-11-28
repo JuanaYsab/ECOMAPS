@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ToastController, ViewWillEnter } from '@ionic/angular';
+import { IonRefresher, ToastController, ViewWillEnter } from '@ionic/angular';
 import { Comentarios } from '../interfaces/comentarios.interface';
 import { ComentariosService } from '../servicios/comentarios.service';
 
@@ -10,6 +10,8 @@ import { ComentariosService } from '../servicios/comentarios.service';
   styleUrls: ['./sugerencias.page.scss'],
 })
 export class SugerenciasPage implements OnInit, ViewWillEnter {
+
+  @ViewChild(IonRefresher) refresher!: IonRefresher;
 
   public form: FormGroup = new FormGroup({
     comentarioCtrl: new FormControl<string>(null,Validators.required)
@@ -25,8 +27,12 @@ export class SugerenciasPage implements OnInit, ViewWillEnter {
   }
 
   ngOnInit() {
+    this.cargarComentarios;
   }
 
+public cargarComentarios(){
+  this.refresher?.complete();
+}
   guardar(){
     this.form.markAllAsTouched();
     if(this.form.valid){

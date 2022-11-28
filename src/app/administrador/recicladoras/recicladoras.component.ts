@@ -81,7 +81,7 @@ export class RecicladorasComponent implements OnInit {
       calle: this.form.controls.calleCtrl.value,
       gps: this.form.controls.gpsCtrl.value,
       estado: this.form.controls.estadoCtrl.value,
-      materiales: this.form.controls.estadoCtrl.value
+      materiales: this.form.controls.materialesCtrl.value
     }
     this.servicioRecicladora.post(recicladora).subscribe({
       next: () => {
@@ -116,7 +116,7 @@ export class RecicladorasComponent implements OnInit {
       calle: this.form.controls.calleCtrl.value,
       gps: this.form.controls.gpsCtrl.value,
       estado: this.form.controls.estadoCtrl.value,
-      materiales: this.form.controls.estadoCtrl.value
+      materiales: this.form.controls.materialCtrl.value
     }
     this.servicioRecicladora.put(recicladora).subscribe({
       next: () => {

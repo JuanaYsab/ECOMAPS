@@ -45,10 +45,18 @@
         <ion-note slot="error" *ngIf="form.controls.pagaCtrl.touched">Seleccione una opción.</ion-note>
       </ion-item>
       <ion-item fill="outline" class="item-espaciado">
+        <ion-label>Materiales:</ion-label>
+        <ion-select formControlName="materialesCtrl" placeholder="Seleccione..." [multiple]="true">
+          <ion-select-option *ngFor="let material of listaMateriales" [value]="material.material">{{material.material}}</ion-select-option>
+        </ion-select>
+        <ion-note slot="error" *ngIf="form.controls.materialesCtrl.touched">Seleccione un material.</ion-note>
+      </ion-item>
+
+      <!--<ion-item fill="outline" class="item-espaciado">
         <ion-label position="stacked">Escriba qué materiales recicla:</ion-label>
         <ion-textarea inputmode="text" formControlName="materialCtrl" autoGrow="true"></ion-textarea>
         <ion-note slot="error" *ngIf="form.controls.materialCtrl.touched">Debe ingresar al menos un material.</ion-note>
-      </ion-item>
+      </ion-item>-->
     </ion-list>
     
     <div id="center">

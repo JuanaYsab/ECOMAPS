@@ -33,6 +33,7 @@ export class AgregarRecPage implements OnInit {
   }
 
   public cargarRecicladoras(){
+    this.refresher?.complete();
     this.cargandoRecicladoras = true;
     this.servicioListaRecicladoras.get().subscribe({
       next: (recicladora) =>{

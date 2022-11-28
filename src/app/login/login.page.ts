@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ToastController } from '@ionic/angular';
+import { IonRefresher, ToastController } from '@ionic/angular';
 import { SesionService } from '../servicios/sesion.service';
 import { Credenciales } from './../interfaces/credenciales.interface'
 
@@ -10,6 +10,10 @@ import { Credenciales } from './../interfaces/credenciales.interface'
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+
+  @ViewChild(IonRefresher) refresher!: IonRefresher;
+
+  public cargandoAdministrador: boolean = false;
 
   public form: FormGroup = new FormGroup({
     ci: new FormControl<number | null>(null, Validators.required),
@@ -24,15 +28,17 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit(): void {
+    this.iniciarSesion();
   }
 
   public iniciarSesion(){
+    this.refresher?.complete();
     this.actualizarValidación();
     if(this.form.valid){
       const cred: Credenciales = {
         ci: this.form.get('ci')?.value,
         password: this.form.get('password')?.value
-      }   
+      }  
       this.servicioSesion.iniciar(cred).subscribe({
         next: (respuesta) => {
           console.log(respuesta);

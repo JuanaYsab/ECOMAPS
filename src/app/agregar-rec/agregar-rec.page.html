@@ -4,6 +4,7 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Recicladoras</ion-title>
+    <ion-progress-bar *ngIf="cargandoRecicladoras" type="indeterminate" color="secondary"></ion-progress-bar>
     <ion-button routerLink="/inicio" fill="clear" id="inicio" slot="end">
       <ion-icon name="home-outline" slot="icon-only"></ion-icon>
     </ion-button>
@@ -11,7 +12,9 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding" style="text-align: justify;">
-
+  <ion-refresher slot="fixed" (ionRefresh)="cargarRecicladoras()">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <p>Estas son las Recicladoras con las que cuenta ECOMAPS.</p>
 
   <ion-list>

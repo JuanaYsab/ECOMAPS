@@ -30,6 +30,7 @@ export class InicioPage implements OnInit {
   }
 
   public cargarMateriales(){
+    this.refresher?.complete();
     this.cargandoMateriales = true;
     this.servicioMateriales.get().subscribe({
       next: (material) =>{

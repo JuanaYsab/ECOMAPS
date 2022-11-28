@@ -32,6 +32,7 @@ export class AdministradorPage implements OnInit {
   }
 
   public cargarRecicladoras(){
+    this.refresher?.complete();
     this.cargandoRecicladoras = true;
     this.servicioRecicladoras.get().subscribe({
       next: (recicladora) =>{

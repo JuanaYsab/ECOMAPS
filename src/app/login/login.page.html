@@ -4,7 +4,6 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Login Administrador</ion-title>
-    <ion-progress-bar *ngIf="" type="indeterminate" color="secondary"></ion-progress-bar>
     <ion-button routerLink="/inicio" fill="clear" id="inicio" slot="end">
       <ion-icon name="home-outline" slot="icon-only"></ion-icon>
     </ion-button>
@@ -12,6 +11,9 @@
 </ion-header>
 
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="iniciarSesion()">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <form [formGroup]="form">
         <ion-item class="item-espaciado">
           <ion-label position="floating">Nro. Documento</ion-label>

@@ -9,6 +9,11 @@
 </ion-header>
 
 <ion-content> 
+
+  <ion-refresher slot="fixed" (ionRefresh)="cargarMateriales()">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  
  
   <div id="container">
     <strong>Seleccione el material que quiera reciclar</strong>
