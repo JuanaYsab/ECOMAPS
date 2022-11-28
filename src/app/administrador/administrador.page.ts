@@ -3,6 +3,7 @@ import { AlertController, IonRefresher, ToastController } from '@ionic/angular';
 import { Recicladoras } from '../interfaces/recicladoras.interface';
 import { AdministrarService } from '../servicios/administrar.service';
 import { RecicladorasComponent } from './recicladoras/recicladoras.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-administrador',
@@ -24,7 +25,8 @@ export class AdministradorPage implements OnInit {
   constructor(
     private servicioRecicladoras: AdministrarService,
     private servicioToast: ToastController,
-    private servicioAlert: AlertController
+    private servicioAlert: AlertController,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -122,5 +124,12 @@ export class AdministradorPage implements OnInit {
       }
     })
   }
+
+  public cerrarSesion(){
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
+  }
+
+
 
 }

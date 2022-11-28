@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { SesionGuard } from './guards/sesion.guard';
 
 const routes: Routes = [
   {
@@ -36,7 +37,7 @@ const routes: Routes = [
     loadChildren: () => import('./inicio/inicio.module').then( m => m.InicioPageModule)
   },
   {
-    path: 'administrador',
+    path: 'administrador', canActivate: [SesionGuard],    
     loadChildren: () => import('./administrador/administrador.module').then( m => m.AdministradorPageModule)
   },
   {

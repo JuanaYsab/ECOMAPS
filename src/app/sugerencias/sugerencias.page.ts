@@ -27,7 +27,7 @@ export class SugerenciasPage implements OnInit, ViewWillEnter {
   }
 
   ngOnInit() {
-    this.cargarComentarios;
+    this.cargarComentarios();
   }
 
 public cargarComentarios(){

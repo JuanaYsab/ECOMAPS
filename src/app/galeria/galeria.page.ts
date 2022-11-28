@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonRefresher } from '@ionic/angular';
 
 @Component({
   selector: 'app-galeria',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GaleriaPage implements OnInit {
 
+    @ViewChild(IonRefresher) refresher!: IonRefresher;
+
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit( ) {
+    this.recargarGaleria();
+  }
+  public recargarGaleria(){
+    this.refresher?.complete();
   }
 
 }

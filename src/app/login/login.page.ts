@@ -3,6 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { IonRefresher, ToastController } from '@ionic/angular';
 import { SesionService } from '../servicios/sesion.service';
 import { Credenciales } from './../interfaces/credenciales.interface'
+import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-login',
@@ -22,17 +24,26 @@ export class LoginPage implements OnInit {
 
   constructor(
     private servicioSesion: SesionService,
-    private servicioToast: ToastController
-  ) { 
+    private servicioToast: ToastController,
+    private router: Router  ) { 
     
   }
 
   ngOnInit(): void {
-    this.iniciarSesion();
-  }
+    const token: string | null = localStorage.getItem('token');
+    if(token){
+      const jwt: JwtHelperService = new JwtHelperService();
+      if(!jwt.isTokenExpired(token)){
+        this.router.navigate(['/administrador'])
+      }
+    }
+    this.recargarLogin();
+    }
+public recargarLogin(){
+  this.refresher?.complete();
+}
 
   public iniciarSesion(){
-    this.refresher?.complete();
     this.actualizarValidación();
     if(this.form.valid){
       const cred: Credenciales = {
@@ -41,21 +52,21 @@ export class LoginPage implements OnInit {
       }  
       this.servicioSesion.iniciar(cred).subscribe({
         next: (respuesta) => {
-          console.log(respuesta);
           this.servicioToast.create({
             header: 'Inicio de sesión correcto',
             message: '',
-            duration: 10000,
+            duration: 2000,
             color: 'success',
             position: 'middle'
           }).then(t=> {t.present()});
+          this.router.navigate(['/administrador'])
         },
         error: (e) => {
-          console.error('Error al iniciar sesión.', e);
+          console.error('CI o contraseña incorrecta.', e);
           this.servicioToast.create({
             header: 'Error al iniciar sesión.',
             message: e.message,
-            duration: 3000,
+            duration: 5000,
             color: 'danger',
             position: 'bottom'
           }).then(toast => toast.present());          
